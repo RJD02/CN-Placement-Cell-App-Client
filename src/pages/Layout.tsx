@@ -1,11 +1,14 @@
+import Header from "../components/Header/Header";
+
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 const Layout = (props: LayoutProps) => {
   return (
-    <div className="bg-slate-100 min-h-screen">
-      <div className="container bg-slate-100 mx-auto min-h-screen">
+    <div className="bg-background min-h-screen">
+      <Header />
+      <div className="container mx-auto">
         {props.children}
       </div>
     </div>

@@ -16,6 +16,22 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#463F3A',
+                        secondary: '#8A817C',
+                        tertiary: '#BCB8B1',
+                        background: '#F4F3EE',
+                        alert: '#E0AFA0',
+                    }
+                }
+            }
+        }
+    </script>
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
