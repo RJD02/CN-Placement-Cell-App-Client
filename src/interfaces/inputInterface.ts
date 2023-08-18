@@ -13,3 +13,13 @@ export interface inputProps {
   value?: string;
   className?: string;
 }
+export interface IInputFields {
+  labelText: string;
+  labelFor: string;
+  id: string;
+  type: string;
+  name: string;
+  autoComplete: string;
+  isRequired: boolean;
+  placeholder: string;
+}
