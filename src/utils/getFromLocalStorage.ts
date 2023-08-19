@@ -1,9 +1,7 @@
-import IAPIResponse from "../interfaces/apiInterface";
 import { ISignupAPIResponse } from "../interfaces/signupInterface";
 
 export const getFromLocalStorage = () => {
-  const details = { isAdmin: "", email: "", id: "", name: "" , isLoggedIn: false};
-  console.log('get from local storage', details);
+  const details = { isAdmin: "", email: "", id: "", name: "" , isLoggedIn: false, token: ''};
   if (localStorage.getItem("isAdmin") !== null) {
       details.isAdmin = localStorage.getItem('isAdmin') as string;
   }
@@ -19,6 +17,10 @@ export const getFromLocalStorage = () => {
   if(localStorage.getItem('isLoggedIn')) {
       details['isLoggedIn'] = parseInt(localStorage.getItem('isLoggedIn') as string) === 1 ? true: false;
   }
+  if(localStorage.getItem('token')) {
+      details['token'] = localStorage.getItem('token') as string;
+  }
+  console.log('Details', details);
   return details
 };
 

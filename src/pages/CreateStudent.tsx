@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import Input from "../components/Input/Input";
 import { IInputFields } from "../interfaces/inputInterface";
+import makeRequest from "../utils/makeRequest";
 import Layout from "./Layout";
 
 const fields: IInputFields[] = [
@@ -35,9 +36,36 @@ const fields: IInputFields[] = [
     placeholder: "Batch name",
   },
 ];
+interface IStudentDetails {
+  name: string;
+  college: string;
+  batch: string;
+  status: string;
+}
 
 const CreateStudent = () => {
-    const [newStudentState, setNewStudentState] = useState();
+  const [newStudentState, setNewStudentState] = useState<IStudentDetails>({
+    name: "",
+    batch: "",
+    college: "",
+    status: "",
+  });
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewStudentState({ ...newStudentState, [e.target.name]: e.target.value });
+  };
+
+  const submitHandler = async () => {
+      const data = await makeRequest('/student', {
+          method: "POST",
+          body: JSON.stringify({
+              name: newStudentState.name,
+              batch: newStudentState.batch,
+              college: newStudentState.college,
+              status: newStudentState.status,
+          })
+      });
+  }
+
   return (
     <Layout>
       {fields.map((field) => (
@@ -50,6 +78,7 @@ const CreateStudent = () => {
           placeholder={field.placeholder}
           type={field.type}
           autoComplete={field.autoComplete}
+          handleChange={changeHandler}
         />
       ))}
     </Layout>

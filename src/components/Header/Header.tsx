@@ -5,8 +5,8 @@ const Header = () => {
   const details = getFromLocalStorage();
   return (
     <div className="container mx-auto flex justify-between items-center">
-      <h1 className="text-4xl">Placement Ninjas</h1>
-      <div className="actions flexl justify-between">
+      <h1 className="text-2xl">Placement Ninjas</h1>
+      <div className="actions flex justify-between">
         <Link to="/login" className="mr-2 text-xl">
           Login
         </Link>

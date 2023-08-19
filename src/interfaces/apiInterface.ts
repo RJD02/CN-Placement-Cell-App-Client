@@ -2,7 +2,7 @@ import { ISignupAPIResponse } from "./signupInterface"
 
 interface IAPIResponse {
     loading: boolean,
-    data: ISignupAPIResponse | null,
+    data: ISignupAPIResponse | unknown,
 }
 
 export default IAPIResponse;
