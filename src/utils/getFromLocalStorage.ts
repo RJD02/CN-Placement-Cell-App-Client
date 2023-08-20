@@ -20,7 +20,6 @@ export const getFromLocalStorage = () => {
   if(localStorage.getItem('token')) {
       details['token'] = localStorage.getItem('token') as string;
   }
-  console.log('Details', details);
   return details
 };
 

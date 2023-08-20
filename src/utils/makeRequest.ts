@@ -5,7 +5,10 @@ const makeRequest = async (url: string, options: RequestInit = {}) => {
     const details = getFromLocalStorage();
     const response = await fetch("http://localhost:8000" + url, {
       ...options,
-      headers: { Authorization: `Bearer ${details.token}` },
+      headers: {
+        Authorization: `Bearer ${details.token}`,
+        "Content-Type": "application/json",
+      },
     });
     if (response.status !== 200) return null;
     const data = await response.json();

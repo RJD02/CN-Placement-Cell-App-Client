@@ -6,7 +6,7 @@ type LayoutProps = {
 
 const Layout = (props: LayoutProps) => {
   return (
-    <div className="bg-background min-h-screen">
+    <div className="bg-background min-h-screen relative">
       <Header />
       <div className="container mx-auto">
         {props.children}
