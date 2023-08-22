@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
+import { IUser } from "../pages/Approve";
 import { IInterview } from "../pages/Interviews";
 import { IStudent } from "../pages/Students";
 
 interface IstudentTableProps {
   headers: string[];
-  data: IStudent[] | IInterview[];
+  data: IStudent[] | IInterview[] | IUser[];
   className?: string;
-  route: string
+  route: string;
 }
 const Table = (props: IstudentTableProps) => {
   return (
@@ -26,7 +27,12 @@ const Table = (props: IstudentTableProps) => {
               <td key={header}>{d[header]}</td>
             ))}
             <td>
-              <Link to={`/${props.route}/${d._id}`} className="underline text-blue-700">Update</Link>
+              <Link
+                to={`/${props.route}/${d._id}`}
+                className="underline text-blue-700"
+              >
+                Update
+              </Link>
             </td>
           </tr>
         ))}

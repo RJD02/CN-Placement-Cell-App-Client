@@ -7,6 +7,8 @@ import Interview from "./pages/Interview";
 import { Login, Signup } from "./pages/SignupLogin";
 import Students from "./pages/Students";
 import CreateStudent from "./pages/CreateStudent";
+import Student from "./pages/Student";
+import Approve from "./pages/Approve";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/create-student" element={<CreateStudent />} />
         <Route path="/interviews" element={<Interviews />} />
+        <Route path="/students/:id" element={<Student />} />
+        <Route path="/approve" element={<Approve />} />
       </Routes>
     </BrowserRouter>
   );

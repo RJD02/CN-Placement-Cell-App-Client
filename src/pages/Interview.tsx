@@ -37,8 +37,6 @@ const Interview = () => {
     fetchInterview();
     fetchStudents();
   }, [id]);
-  console.log(students);
-  console.log(interview);
   return (
     <Layout>
       <div className="interview-details">

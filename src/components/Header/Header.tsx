@@ -18,6 +18,14 @@ const Header = () => {
             <Link to="/interviews" className="mr-2 text-xl">
               Interview
             </Link>
+            {details.isAdmin && (
+              <Link to="/approve" className="mr-2 text-xl">
+                Approve
+              </Link>
+            )}
+            <Link to="/report" className="mr-2 text-xl">
+              Report
+            </Link>
           </>
         )}
       </div>
