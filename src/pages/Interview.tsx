@@ -20,6 +20,7 @@ const Interview = () => {
   useEffect(() => {
     const fetchInterview = async () => {
       const data = await makeRequest("/interview/" + id);
+      if(!data) return;
       const dateOfInterview = new Date(data.data.dateOfInterview);
       const date = `${dateOfInterview.getDate()}/${
         dateOfInterview.getMonth() + 1
@@ -29,6 +30,7 @@ const Interview = () => {
 
     const fetchStudents = async () => {
       const data = await makeRequest("/result/" + id + "/students");
+      if(!data) return ;
       setStudents(
         data.data.map((b: IResultForStudentsWithInterviewId) => b.student)
       );
@@ -47,7 +49,7 @@ const Interview = () => {
         </h5>
       </div>
       <div className="students mt-4">
-        <h3 className="text-xl">Students assigned to interview</h3>
+          <h3 className="text-xl">Students assigned to interview</h3>
         {students.length > 0 && (
           <Table
             headers={["name", "college", "status", "batch"]}

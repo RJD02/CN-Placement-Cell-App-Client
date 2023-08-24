@@ -6,9 +6,10 @@ import Interviews from "./pages/Interviews";
 import Interview from "./pages/Interview";
 import { Login, Signup } from "./pages/SignupLogin";
 import Students from "./pages/Students";
-import CreateStudent from "./pages/CreateStudent";
 import Student from "./pages/Student";
 import Approve from "./pages/Approve";
+import Results from "./pages/Results";
+import { getFromLocalStorage } from "./utils/getFromLocalStorage";
 
 function App() {
   return (
@@ -19,10 +20,10 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/students" element={<Students />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/create-student" element={<CreateStudent />} />
         <Route path="/interviews" element={<Interviews />} />
         <Route path="/students/:id" element={<Student />} />
         <Route path="/approve" element={<Approve />} />
+        <Route path="/result" element={<Results />} />
       </Routes>
     </BrowserRouter>
   );

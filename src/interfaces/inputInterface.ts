@@ -8,9 +8,9 @@ export interface inputProps {
   type: string;
   autoComplete?: string;
   isRequired: boolean;
-  placeholder: string;
+  placeholder?: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
+  value?: string | number;
   className?: string;
 }
 export interface IInputFields {

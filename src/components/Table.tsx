@@ -8,7 +8,9 @@ interface IstudentTableProps {
   data: IStudent[] | IInterview[] | IUser[];
   className?: string;
   route: string;
+  lastColText?: string,
 }
+
 const Table = (props: IstudentTableProps) => {
   return (
     <table className={`table-auto w-full text-center my-8 ${props.className}`}>
@@ -17,7 +19,7 @@ const Table = (props: IstudentTableProps) => {
           {props.headers.map((header) => (
             <th key={header}>{header.toUpperCase()}</th>
           ))}
-          <th>UPDATE</th>
+          <th>{props.lastColText}</th>
         </tr>
       </thead>
       <tbody>
@@ -31,7 +33,7 @@ const Table = (props: IstudentTableProps) => {
                 to={`/${props.route}/${d._id}`}
                 className="underline text-blue-700"
               >
-                Update
+                {props.lastColText || 'update'}
               </Link>
             </td>
           </tr>

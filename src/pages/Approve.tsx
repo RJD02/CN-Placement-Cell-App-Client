@@ -27,15 +27,41 @@ const Approve = () => {
   if (!details.isAdmin) {
     return <div>Approve</div>;
   }
+  const approveHandler = async (id: string) => {
+    const response = await makeRequest("/user/" + id + "/approve");
+    window.location.reload();
+  };
   return (
     <Layout>
       <h1>Hello admin</h1>
       <h2>Approve a user</h2>
-      <Table
-        headers={["email", "name", "batch"]}
-        data={unApprovedUsers}
-        route="approve"
-      />
+      <table className={`table-auto w-full text-center my-8 `}>
+        <thead>
+          <tr>
+            {["email", "name", "batch"].map((header) => (
+              <th key={header}>{header.toUpperCase()}</th>
+            ))}
+            <th>Approve</th>
+          </tr>
+        </thead>
+        <tbody>
+          {unApprovedUsers.map((d: any) => (
+            <tr key={d._id}>
+              {["email", "name", "batch"].map((header: string) => (
+                <td key={header}>{d[header]}</td>
+              ))}
+              <td>
+                <p
+                  onClick={() => approveHandler(d._id)}
+                  className="underline text-blue-500 pointer-cursor"
+                >
+                  Approve
+                </p>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </Layout>
   );
 };

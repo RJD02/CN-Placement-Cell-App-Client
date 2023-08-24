@@ -2,9 +2,12 @@ import { IStudent } from "./Students";
 import { useEffect, useState } from "react";
 import { IInterview } from "./Interviews";
 import makeRequest from "../utils/makeRequest";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Layout from "./Layout";
 import Table from "../components/Table";
+import Modal from "../components/Modal/Modal";
+import CreateStudent from "./CreateStudent";
+import { getFromLocalStorage } from "../utils/getFromLocalStorage";
 
 interface IResultForInterviewWithStudentId {
   _id: string;
@@ -13,15 +16,39 @@ interface IResultForInterviewWithStudentId {
   student: string;
 }
 
+interface IStudentDetails {
+  name: string;
+  college: string;
+  batch: string;
+  status: string;
+  scores: {
+    DSAFinalScore: number;
+    WebDFinalScore: number;
+    ReactFinalScore: number;
+  };
+}
 const Student = () => {
+  const details = getFromLocalStorage();
+  const navigate = useNavigate();
   const { id } = useParams();
-  const [student, setStudent] = useState<IStudent>();
+  const [student, setStudent] = useState<IStudentDetails>({
+    name: "",
+    college: "",
+    batch: "",
+    status: "not_placed",
+    scores: { DSAFinalScore: 0, WebDFinalScore: 0, ReactFinalScore: 0 },
+  });
   const [interviews, setInterviews] = useState<IInterview[]>([]);
+  const [isModalActive, setIsModalActive] = useState(false);
 
   useEffect(() => {
+    if (!details || !details.isLoggedIn) {
+      navigate("/login");
+      return;
+    }
     const fetchStudent = async () => {
       const data = await makeRequest("/student/" + id);
-      setStudent(data.data);
+      setStudent(data.data[0]);
     };
     fetchStudent();
     const fetchInterviews = async () => {
@@ -40,6 +67,10 @@ const Student = () => {
     };
     fetchInterviews();
   }, [id]);
+  const editHandler = () => {
+    console.log(student);
+    setIsModalActive(true);
+  };
   return (
     <Layout>
       <div className="student-details">
@@ -50,6 +81,12 @@ const Student = () => {
           Placement status:{" "}
           <span className="text-green-700">{student?.status}</span>
         </h6>
+        <button
+          onClick={editHandler}
+          className="bg-gray-700 text-white rounded px-2 py-1 mt-2 cursor-pointer"
+        >
+          Edit
+        </button>
       </div>
       <div className="interviews mt-4">
         <h3 className="text-xl">Interviews enrolled in</h3>
@@ -61,6 +98,19 @@ const Student = () => {
           />
         )}
       </div>
+      <CreateStudent
+        state={isModalActive}
+        setState={setIsModalActive}
+        initialState={{
+          name: student.name,
+          college: student?.college,
+          batch: student?.batch,
+          status: student?.status,
+          ReactFinalScore: student.scores.ReactFinalScore,
+          WebDFinalScore: student.scores.WebDFinalScore,
+          DSAFinalScore: student.scores.DSAFinalScore,
+        }}
+      />
     </Layout>
   );
 };
