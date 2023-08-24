@@ -1,7 +1,10 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
-import { deleteFromLocalStorage, storeToLocalStorage } from "../utils/getFromLocalStorage";
+import {
+  deleteFromLocalStorage,
+  storeToLocalStorage,
+} from "../utils/getFromLocalStorage";
 import makeRequest from "../utils/makeRequest";
 import Layout from "./Layout";
 import { signupFields as signupInputFields } from "./inputFields";
@@ -19,7 +22,7 @@ interface ISignupFields {
 }
 
 export const Signup = () => {
-   deleteFromLocalStorage();
+  deleteFromLocalStorage();
   const navigate = useNavigate();
   const [signupState, setSignupState] = useState<ISignupFields>({
     email: "",
@@ -55,7 +58,7 @@ export const Signup = () => {
         batch: signupState.batch,
       }),
     });
-    if(!data) return ;
+    if (!data) return;
     storeToLocalStorage(data);
     navigate("/login");
   }
@@ -127,6 +130,10 @@ export const Login = () => {
         password: loginState.password,
       }),
     });
+    if (!data) {
+      setWarningState({ isActive: true, message: data.message });
+      return;
+    }
     console.log(data);
     if (!data.data) {
       setWarningState({ isActive: true, message: data.message });
@@ -141,7 +148,10 @@ export const Login = () => {
       <div className="flex flex-col justify-center items-center h-100 mt-10  bg-zinc-200 text-primary w-1/2 mx-auto rounded">
         <h1 className="text-3xl mt-3 capitalize font-bold">Login</h1>
         <p className="mt-5">
-          Don't have an account? <Link className="underline" to="/signup">Signup</Link>
+          Don't have an account?{" "}
+          <Link className="underline" to="/signup">
+            Signup
+          </Link>
         </p>
         {loginInputFields.map((field) => (
           <Input

@@ -25,6 +25,7 @@ const Interviews = () => {
   useEffect(() => {
     const getInterviews = async () => {
       const data = await makeRequest("/interview");
+      if(!data) return;
       const studentData = data.data.map((d: IInterview) => {
         const date = new Date(d.dateOfInterview);
         return {

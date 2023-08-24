@@ -29,11 +29,13 @@ const Results = () => {
     }
     const getStudents = async () => {
       const data = await makeRequest("/student");
+      if(!data) return;
       setStudents(data.data);
     };
     getStudents();
     const getInterviews = async () => {
       const data = await makeRequest("/interview");
+      if(!data) return;
       setInterviews(data.data);
     };
     getInterviews();

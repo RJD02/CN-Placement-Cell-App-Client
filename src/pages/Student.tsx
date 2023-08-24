@@ -48,11 +48,13 @@ const Student = () => {
     }
     const fetchStudent = async () => {
       const data = await makeRequest("/student/" + id);
+      if(!data) return;
       setStudent(data.data[0]);
     };
     fetchStudent();
     const fetchInterviews = async () => {
       const data = await makeRequest("/result/" + id + "/interviews");
+      if(!data) return;
       let interviewData = data.data.map(
         (b: IResultForInterviewWithStudentId) => b.interview
       );
