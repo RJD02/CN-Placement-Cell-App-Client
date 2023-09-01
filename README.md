@@ -1,6 +1,8 @@
 # Placement Cell(Client)
 Client code for the full stack web application used to provide visual insights.
 
+This is the client part of project, [here](https://github.com/RJD02/CN-Placement-Cell-App-Server/) is the server part.
+
 ## Key Features:
 1. Scaleable folder structure(separate pages, components, and hooks)
 2. Uses fetch API to connect to backend
